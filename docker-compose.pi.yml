@@ -1,0 +1,22 @@
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      platforms:
+        - linux/arm64
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      SQLITE_PATH: /data/isms.sqlite
+      AUTH_JWT_SECRET: change-me-on-pi-please
+      AUTH_JWT_ISSUER: isms-zinduka
+    volumes:
+      - api_data:/data
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  api_data:
+
